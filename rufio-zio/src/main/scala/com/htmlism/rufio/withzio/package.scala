@@ -1,5 +1,5 @@
 package com.htmlism.rufio
 
-package object ziorc {
+package object withzio {
 
 }

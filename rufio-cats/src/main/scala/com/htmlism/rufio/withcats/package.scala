@@ -1,5 +1,5 @@
 package com.htmlism.rufio
 
-package object cats {
+package object withcats {
 
 }
