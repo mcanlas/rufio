@@ -1,5 +1,7 @@
 package com.htmlism.rufio
 
-package object withcats {
+import cats.effect._
 
+package object withcats {
+  implicit class FileOps[F[_]](implicit F: Sync[F])
 }
