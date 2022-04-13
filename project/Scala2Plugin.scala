@@ -4,7 +4,7 @@ import sbt._
 /**
   * Automatically enriches projects with the following settings (despite the word "override").
   */
-object Scala3Plugin extends AutoPlugin {
+object Scala2Plugin extends AutoPlugin {
 
   /**
     * Thus plug-in will automatically be enabled; it has no requirements.
