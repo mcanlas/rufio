@@ -10,6 +10,9 @@ package object withcats {
   type File =
     core.File
 
+  val File =
+    core.File
+
   implicit class FileOps[F[_]](f: File)(implicit F: Sync[F]) {
     def contents: F[String] =
       F.delay {
