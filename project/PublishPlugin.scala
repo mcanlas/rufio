@@ -17,7 +17,7 @@ object PublishPlugin extends AutoPlugin {
   override def trigger: PluginTrigger = AllRequirements
 
   override val buildSettings: Seq[Setting[_]] = Seq(
-    organization := "com.htmlism",
+    organization := "com.htmlism"
   )
 
   object ThingsToAutoImport {
