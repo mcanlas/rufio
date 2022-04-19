@@ -1,10 +1,10 @@
 package com.htmlism.rufio
 
-import cats.effect._
-import cats.syntax.all._
-
 import java.nio.charset.Charset
 import java.nio.file.Files
+
+import cats.effect._
+import cats.syntax.all._
 
 package object withcats {
   type File =
