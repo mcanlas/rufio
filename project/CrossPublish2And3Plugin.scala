@@ -4,7 +4,7 @@ import sbt._
 /**
   * Automatically enriches projects with the following settings (despite the word "override").
   */
-object Scala2Plugin extends AutoPlugin {
+object CrossPublish2And3Plugin extends AutoPlugin {
 
   /**
     * Thus plug-in will automatically be enabled; it has no requirements.
@@ -12,6 +12,6 @@ object Scala2Plugin extends AutoPlugin {
   override def trigger: PluginTrigger = AllRequirements
 
   override val buildSettings: Seq[Setting[_]] = Seq(
-    scalaVersion := "2.13.10"
+    crossScalaVersions := Seq("2.13.10", "3.2.0")
   )
 }
