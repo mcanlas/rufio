@@ -1,7 +1,7 @@
 lazy val rufio =
   project
     .in(file("."))
-    .aggregate(`rufio-core`, `rufio-cats`, `rufio-zio`, `rufio-zio-rc`)
+    .aggregate(`rufio-core`, `rufio-cats`, `rufio-zio`)
     .disablePublshing
 
 lazy val `rufio-core` =
@@ -15,9 +15,4 @@ lazy val `rufio-cats` =
 lazy val `rufio-zio` =
   project
     .withZio
-    .dependsOn(`rufio-core`)
-
-lazy val `rufio-zio-rc` =
-  project
-    .withZioRc
     .dependsOn(`rufio-core`)
