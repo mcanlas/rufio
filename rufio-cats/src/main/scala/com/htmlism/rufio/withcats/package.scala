@@ -13,8 +13,8 @@ package object withcats {
   val File =
     core.File
 
-  implicit class FileOps[F[_]](f: File)(implicit F: Sync[F]) {
-    def contents: F[String] =
+  implicit class FileOps(f: File) {
+    def contents[F[_]](implicit F: Sync[F]): F[String] =
       F.delay {
         Files.readAllBytes(f.path)
       }.map(xs => new String(xs, Charset.defaultCharset()))
