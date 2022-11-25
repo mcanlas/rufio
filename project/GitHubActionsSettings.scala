@@ -1,4 +1,5 @@
 import sbt._
+import sbt.Keys._
 import sbtghactions._
 import sbtghactions.GenerativeKeys._
 
@@ -16,9 +17,16 @@ object GitHubActionsSettings extends AutoPlugin {
     GitHubActionsPlugin
 
   override val buildSettings: Seq[Setting[_]] = Seq(
+    organization := "com.htmlism",
+    publishTo := Some("GitHub" at "https://maven.pkg.github.com/mcanlas/rufio/"),
+    credentials += Credentials(
+      "GitHub Package Registry",
+      "maven.pkg.github.com",
+      "mcanlas",
+      System.getenv("GITHUB_TOKEN")
+    ),
     githubWorkflowBuild := Seq(WorkflowStep.Sbt(List("scalafmtCheck", "test"))),
-    githubWorkflowEnv := Map.empty,
-    githubWorkflowPublishTargetBranches := Nil,
+    githubWorkflowEnv := Map("GITHUB_TOKEN" -> "${{ secrets.WRITE_PACKAGES_TOKEN }}"),
     githubWorkflowIncludeClean := false
   )
 }
