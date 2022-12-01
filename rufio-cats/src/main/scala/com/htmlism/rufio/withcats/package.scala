@@ -1,10 +1,10 @@
 package com.htmlism.rufio
 
-import java.nio.charset.Charset
 import java.nio.file.Files
 
+import scala.jdk.CollectionConverters._
+
 import cats.effect._
-import cats.syntax.all._
 
 package object withcats {
   type File =
@@ -13,10 +13,19 @@ package object withcats {
   val File =
     core.File
 
-  implicit class FileOps(f: File) {
-    def contents[F[_]](implicit F: Sync[F]): F[String] =
+  implicit class CatsFileOps[F[_]](f: File)(implicit F: Sync[F]) extends core.FileOps[F] {
+    def contents: F[String] =
       F.delay {
-        Files.readAllBytes(f.path)
-      }.map(xs => new String(xs, Charset.defaultCharset()))
+        Files
+          .readString(f.path)
+      }
+
+    def getLines: F[List[String]] =
+      F.delay {
+        (Files
+          .readAllLines(f.path): java.lang.Iterable[String])
+          .asScala
+          .toList
+      }
   }
 }
