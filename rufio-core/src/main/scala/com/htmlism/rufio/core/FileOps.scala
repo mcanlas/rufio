@@ -5,5 +5,5 @@ trait FileOps[F[_]] {
 
   def getLines: F[List[String]]
 
-  def write(s: String): F[Unit]
+  def writeLine(s: String): F[Unit]
 }

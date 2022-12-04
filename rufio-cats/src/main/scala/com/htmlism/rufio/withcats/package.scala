@@ -29,10 +29,10 @@ package object withcats {
           .toList
       }
 
-    def write(s: String): F[Unit] =
+    def writeLine(s: String): F[Unit] =
       F.delay {
         Files
-          .write(f.path, s.getBytes)
+          .writeString(f.path, (s + "\n"))
       }.void
   }
 }

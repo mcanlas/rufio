@@ -28,10 +28,10 @@ package object withzio {
           .toList
       }
 
-    def write(s: String): Task[Unit] =
+    def writeLine(s: String): Task[Unit] =
       ZIO.attempt {
         Files
-          .write(f.path, s.getBytes)
+          .writeString(f.path, (s + "\n"))
       }.unit
   }
 }
