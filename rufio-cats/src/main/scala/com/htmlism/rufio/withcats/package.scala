@@ -5,6 +5,7 @@ import java.nio.file.Files
 import scala.jdk.CollectionConverters._
 
 import cats.effect._
+import cats.syntax.all._
 
 package object withcats {
   type File =
@@ -27,5 +28,11 @@ package object withcats {
           .asScala
           .toList
       }
+
+    def write(s: String): F[Unit] =
+      F.delay {
+        Files
+          .write(f.path, s.getBytes)
+      }.void
   }
 }

@@ -27,5 +27,11 @@ package object withzio {
           .asScala
           .toList
       }
+
+    def write(s: String): Task[Unit] =
+      ZIO.attempt {
+        Files
+          .write(f.path, s.getBytes)
+      }.unit
   }
 }
