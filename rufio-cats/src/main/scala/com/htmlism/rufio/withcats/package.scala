@@ -29,10 +29,16 @@ package object withcats {
           .toList
       }
 
-    def writeLine(s: String): F[Unit] =
+    def writeString(s: String): F[Unit] =
       F.delay {
         Files
-          .writeString(f.path, (s + "\n"))
+          .writeString(f.path, s + "\n")
+      }.void
+
+    def writeLines(xs: Iterable[String]): F[Unit] =
+      F.delay {
+        Files
+          .writeString(f.path, xs.map(_ + "\n").mkString)
       }.void
   }
 }

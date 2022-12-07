@@ -28,10 +28,16 @@ package object withzio {
           .toList
       }
 
-    def writeLine(s: String): Task[Unit] =
+    def writeString(s: String): Task[Unit] =
       ZIO.attempt {
         Files
-          .writeString(f.path, (s + "\n"))
+          .writeString(f.path, s + "\n")
+      }.unit
+
+    def writeLines(xs: Iterable[String]): Task[Unit] =
+      ZIO.attempt {
+        Files
+          .writeString(f.path, xs.map(_ + "\n").mkString)
       }.unit
   }
 }

@@ -15,5 +15,10 @@ trait FileOps[F[_]] {
   /**
     * Write a `String` to a file, ending with a newline
     */
-  def writeLine(s: String): F[Unit]
+  def writeString(s: String): F[Unit]
+
+  /**
+    * Write lines to a file, ending each with a newline
+    */
+  def writeLines(xs: Iterable[String]): F[Unit]
 }
