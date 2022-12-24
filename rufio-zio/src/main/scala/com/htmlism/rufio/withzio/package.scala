@@ -31,13 +31,13 @@ package object withzio {
     def writeString(s: String): Task[Unit] =
       ZIO.attempt {
         Files
-          .writeString(f.path, s + "\n")
+          .write(f.path, List(s).asJava)
       }.unit
 
     def writeLines(xs: Iterable[String]): Task[Unit] =
       ZIO.attempt {
         Files
-          .writeString(f.path, xs.map(_ + "\n").mkString)
+          .write(f.path, xs.asJava)
       }.unit
   }
 }

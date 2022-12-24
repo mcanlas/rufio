@@ -32,13 +32,13 @@ package object withcats {
     def writeString(s: String): F[Unit] =
       F.delay {
         Files
-          .writeString(f.path, s + "\n")
+          .write(f.path, List(s).asJava)
       }.void
 
     def writeLines(xs: Iterable[String]): F[Unit] =
       F.delay {
         Files
-          .writeString(f.path, xs.map(_ + "\n").mkString)
+          .write(f.path, xs.asJava)
       }.void
   }
 }
