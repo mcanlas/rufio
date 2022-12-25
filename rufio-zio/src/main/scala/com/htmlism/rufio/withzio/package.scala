@@ -39,5 +39,11 @@ package object withzio {
         Files
           .write(f.path, xs.asJava)
       }.unit
+
+    def exists: Task[Boolean] =
+      ZIO.attempt {
+        Files
+          .exists(f.path)
+      }
   }
 }

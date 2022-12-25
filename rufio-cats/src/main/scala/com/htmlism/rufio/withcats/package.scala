@@ -40,5 +40,11 @@ package object withcats {
         Files
           .write(f.path, xs.asJava)
       }.void
+
+    def exists: F[Boolean] =
+      F.delay {
+        Files
+          .exists(f.path)
+      }
   }
 }
