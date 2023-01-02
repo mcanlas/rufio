@@ -17,9 +17,9 @@ object GitHubActionsSettings extends AutoPlugin {
     GitHubActionsPlugin
 
   override val buildSettings: Seq[Setting[_]] = Seq(
-    organization               := "com.htmlism",
-    versionScheme              := Some("strict"),
-    publishTo                  := Some("GitHub" at "https://maven.pkg.github.com/mcanlas/rufio/"),
+    organization  := "com.htmlism",
+    versionScheme := Some("strict"),
+    publishTo     := Some("GitHub" at "https://maven.pkg.github.com/mcanlas/rufio/"),
     credentials += Credentials(
       "GitHub Package Registry",
       "maven.pkg.github.com",
