@@ -31,7 +31,7 @@ object ProjectPlugin extends AutoPlugin {
 
       def withZio: Project =
         p
-          .settings(libraryDependencies += "dev.zio" %% "zio" % "2.0.5")
+          .settings(libraryDependencies += "dev.zio" %% "zio" % "2.0.7")
 
       def withTesting: Project =
         p.settings(libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.15" % "test")
