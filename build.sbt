@@ -2,7 +2,7 @@ lazy val rufio =
   project
     .in(file("."))
     .aggregate(core, cats, zio)
-    .disablePublshing
+    .disablePublishing
 
 lazy val core =
   module("core")
