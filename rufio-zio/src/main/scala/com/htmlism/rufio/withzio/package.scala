@@ -2,9 +2,9 @@ package com.htmlism.rufio
 
 import java.nio.file.Files
 
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 
-import zio._
+import zio.*
 
 package object withzio {
   type File =

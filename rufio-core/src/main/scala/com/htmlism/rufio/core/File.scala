@@ -6,5 +6,5 @@ case class File(path: Path)
 
 object File {
   def apply(first: String, fragments: String*): File =
-    File(Path.of(first, fragments: _*))
+    File(Path.of(first, fragments*))
 }

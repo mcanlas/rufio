@@ -2,10 +2,10 @@ package com.htmlism.rufio
 
 import java.nio.file.Files
 
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 
-import cats.effect._
-import cats.syntax.all._
+import cats.effect.*
+import cats.syntax.all.*
 
 package object withcats {
   type File =
