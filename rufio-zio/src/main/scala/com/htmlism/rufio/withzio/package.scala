@@ -15,13 +15,13 @@ package object withzio {
 
   implicit class ZioFileOps(f: File) extends core.FileOps[Task] {
     def contents: Task[String] =
-      ZIO.attempt {
+      ZIO.attemptBlocking {
         Files
           .readString(f.path)
       }
 
     def getLines: Task[List[String]] =
-      ZIO.attempt {
+      ZIO.attemptBlocking {
         (Files
           .readAllLines(f.path): java.lang.Iterable[String])
           .asScala
@@ -29,19 +29,19 @@ package object withzio {
       }
 
     def writeString(s: String): Task[Unit] =
-      ZIO.attempt {
+      ZIO.attemptBlocking {
         Files
           .write(f.path, List(s).asJava)
       }.unit
 
     def writeLines(xs: Iterable[String]): Task[Unit] =
-      ZIO.attempt {
+      ZIO.attemptBlocking {
         Files
           .write(f.path, xs.asJava)
       }.unit
 
     def exists: Task[Boolean] =
-      ZIO.attempt {
+      ZIO.attemptBlocking {
         Files
           .exists(f.path)
       }

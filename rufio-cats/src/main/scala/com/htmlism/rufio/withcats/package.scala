@@ -16,13 +16,13 @@ package object withcats {
 
   implicit class CatsFileOps[F[_]](f: File)(implicit F: Sync[F]) extends core.FileOps[F] {
     def contents: F[String] =
-      F.delay {
+      F.blocking {
         Files
           .readString(f.path)
       }
 
     def getLines: F[List[String]] =
-      F.delay {
+      F.blocking {
         (Files
           .readAllLines(f.path): java.lang.Iterable[String])
           .asScala
@@ -30,19 +30,19 @@ package object withcats {
       }
 
     def writeString(s: String): F[Unit] =
-      F.delay {
+      F.blocking {
         Files
           .write(f.path, List(s).asJava)
       }.void
 
     def writeLines(xs: Iterable[String]): F[Unit] =
-      F.delay {
+      F.blocking {
         Files
           .write(f.path, xs.asJava)
       }.void
 
     def exists: F[Boolean] =
-      F.delay {
+      F.blocking {
         Files
           .exists(f.path)
       }
