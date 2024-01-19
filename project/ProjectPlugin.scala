@@ -27,7 +27,7 @@ object ProjectPlugin extends AutoPlugin {
     implicit class ProjectOps(p: Project) {
       def withCats: Project =
         p
-          .settings(libraryDependencies += "org.typelevel" %% "cats-effect" % "3.5.2")
+          .settings(libraryDependencies += "org.typelevel" %% "cats-effect" % "3.5.3")
 
       def withZio: Project =
         p
