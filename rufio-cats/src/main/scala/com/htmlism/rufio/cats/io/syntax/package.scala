@@ -6,12 +6,7 @@ import com.htmlism.rufio.core.*
 
 package object syntax {
   private lazy val ioThunker: Thunker[IO] =
-    new Thunker[IO] {
-      def delay[A](x: A): IO[A] =
-        IO.blocking {
-          x
-        }
-    }
+    com.htmlism.rufio.cats.sync.syntax.syncThunker[IO]
 
   implicit class InstanceOpsIo(path: Path) extends PathInstanceOps(path, ioThunker)
 
