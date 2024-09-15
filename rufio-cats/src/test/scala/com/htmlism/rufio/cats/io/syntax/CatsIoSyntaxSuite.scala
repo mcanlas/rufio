@@ -17,4 +17,14 @@ object CatsIoSyntaxSuite extends SimpleIOSuite {
       b <- f.exists
     } yield expect(b)
   }
+
+  test("Can test if a file exists") {
+    for {
+      f <- Path.createTemporaryFile
+
+      _ <- out.println(f)
+
+      b <- f.exists
+    } yield expect(b)
+  }
 }
