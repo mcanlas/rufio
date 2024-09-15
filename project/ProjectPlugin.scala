@@ -33,8 +33,17 @@ object ProjectPlugin extends AutoPlugin {
         p
           .settings(libraryDependencies += "dev.zio" %% "zio" % "2.1.9")
 
-      def withTesting: Project =
-        p.settings(libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.16" % "test")
+      def withTesting: Project = {
+        val weaverVersion =
+          "0.8.4"
+
+        p.settings(
+          libraryDependencies ++= Seq(
+            "com.disneystreaming" %% "weaver-cats"       % weaverVersion % Test,
+            "com.disneystreaming" %% "weaver-scalacheck" % weaverVersion % Test
+          )
+        )
+      }
     }
   }
 }

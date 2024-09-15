@@ -12,6 +12,7 @@ lazy val cats =
   module("cats")
     .settings(description := "A functional interface for file IO, with `cats-effect` integration")
     .withCats
+    .withTesting
     .dependsOn(core)
 
 lazy val zio =
