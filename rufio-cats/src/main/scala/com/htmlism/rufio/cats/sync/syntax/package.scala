@@ -8,7 +8,7 @@ package object syntax {
   private def syncThunker[F[_]](implicit F: Sync[F]): Thunker[F] =
     new Thunker[F] {
       def delay[A](x: A): F[A] =
-        F.delay {
+        F.blocking {
           x
         }
     }

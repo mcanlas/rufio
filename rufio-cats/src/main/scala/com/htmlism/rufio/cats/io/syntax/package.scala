@@ -8,7 +8,7 @@ package object syntax {
   private lazy val ioThunker: Thunker[IO] =
     new Thunker[IO] {
       def delay[A](x: A): IO[A] =
-        IO.delay {
+        IO.blocking {
           x
         }
     }
