@@ -1,12 +1,17 @@
 package com.htmlism.rufio.cats.io.syntax
 
-import cats.effect.IO
 import weaver.SimpleIOSuite
 
+import com.htmlism.rufio.core.Path
+
 object CatsIoSyntaxSuite extends SimpleIOSuite {
-  test("") {
-    IO {
-      expect.eql(1, 1)
-    }
+  test("Can create a temporary file") {
+    for {
+      f <- Path.createTemporaryFile
+
+      _ <- cats.effect.std.Console.make.println(f)
+
+      b <- f.exists
+    } yield expect(b)
   }
 }

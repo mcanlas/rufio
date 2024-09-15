@@ -4,8 +4,8 @@ import java.nio.file.Files
 
 import scala.jdk.CollectionConverters.*
 
-import cats.effect.*
-import cats.syntax.all.*
+import _root_.cats.effect.*
+import _root_.cats.syntax.all.*
 
 package object withcats {
   type File =
