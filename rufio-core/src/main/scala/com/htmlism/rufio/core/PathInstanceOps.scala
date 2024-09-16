@@ -45,4 +45,10 @@ class PathInstanceOps[F[_]](path: Path, thunker: Thunker[F]) {
       Files
         .setPosixFilePermissions(path, permissions.asJava)
     }
+
+  def create: F[Path] =
+    thunker.blocking {
+      Files
+        .createFile(path)
+    }
 }

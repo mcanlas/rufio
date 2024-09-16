@@ -100,4 +100,17 @@ object CatsSyncSyntaxSuite extends SimpleIOSuite {
       Set(PosixFilePermission.OWNER_READ, PosixFilePermission.OWNER_WRITE, PosixFilePermission.OWNER_WRITE)
     )
   }
+
+  test("Can create a file") {
+    val fileName =
+      util.Random.alphanumeric.take(10).mkString + ".tmp"
+
+    for {
+      p <- Path.of("/tmp", fileName).create
+
+      _ <- out.println(s"Touch at ${p.toString}")
+
+      b <- p.exists
+    } yield expect(b)
+  }
 }
