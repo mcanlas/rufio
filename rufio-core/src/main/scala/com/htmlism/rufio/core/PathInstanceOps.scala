@@ -4,7 +4,7 @@ import java.nio.file.Files
 
 class PathInstanceOps[F[_]](path: Path, thunker: Thunker[F]) {
   def exists: F[Boolean] =
-    thunker.delay {
+    thunker.blocking {
       Files.exists(path)
     }
 }

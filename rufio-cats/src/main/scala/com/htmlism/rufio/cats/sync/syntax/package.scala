@@ -7,7 +7,7 @@ import com.htmlism.rufio.core.*
 package object syntax {
   private[cats] def syncThunker[F[_]](implicit F: Sync[F]): Thunker[F] =
     new Thunker[F] {
-      def delay[A](x: A): F[A] =
+      def blocking[A](x: A): F[A] =
         F.blocking {
           x
         }

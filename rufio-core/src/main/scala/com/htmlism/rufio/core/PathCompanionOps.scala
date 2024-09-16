@@ -4,7 +4,7 @@ import java.nio.file.Files
 
 class PathCompanionOps[F[_]](thunker: Thunker[F]) {
   def createTemporaryFile: F[Path] =
-    thunker.delay {
+    thunker.blocking {
       Files.createTempFile("", "")
     }
 }
