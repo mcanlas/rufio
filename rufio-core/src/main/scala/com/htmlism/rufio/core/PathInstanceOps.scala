@@ -6,6 +6,26 @@ import java.nio.file.attribute.PosixFilePermission
 import scala.jdk.CollectionConverters.*
 
 class PathInstanceOps[F[_]](path: Path, thunker: Thunker[F]) {
+  def readLines: F[List[String]] =
+    thunker.blocking {
+      Files
+        .readAllLines(path)
+        .asScala
+        .toList
+    }
+
+  def writeString(s: String): F[Path] =
+    thunker.blocking {
+      Files
+        .write(path, List(s).asJava)
+    }
+
+  def writeLines(xs: Iterable[String]): F[Path] =
+    thunker.blocking {
+      Files
+        .write(path, xs.asJava)
+    }
+
   def exists: F[Boolean] =
     thunker.blocking {
       Files.exists(path)

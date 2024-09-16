@@ -30,6 +30,46 @@ object CatsSyncSyntaxSuite extends SimpleIOSuite {
     } yield expect(b)
   }
 
+  test("Can write lines") {
+    val expected =
+      List("foo", "bar")
+
+    for {
+      f <- Path.createTemporaryFile
+
+      _ <- f.writeLines(expected)
+
+      xs <- f.readLines
+    } yield expect.eql(expected, xs)
+  }
+
+  test("Can write a string") {
+    val expected =
+      "foo\nbar"
+
+    for {
+      f <- Path.createTemporaryFile
+
+      _ <- f.writeString(expected)
+
+      xs <- f.readLines
+    } yield expect.eql(expected, xs.mkString("\n"))
+
+  }
+
+  test("Can read lines") {
+    val expected =
+      List("foo", "bar")
+
+    for {
+      f <- Path.createTemporaryFile
+
+      _ <- f.writeLines(expected)
+
+      xs <- f.readLines
+    } yield expect.eql(expected, xs)
+  }
+
   test("Can get file permissions") {
     for {
       f <- Path.createTemporaryFile
