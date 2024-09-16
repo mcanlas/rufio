@@ -1,6 +1,9 @@
 package com.htmlism.rufio.cats.sync
 
+import java.nio.file.attribute.PosixFilePermission
+
 import cats.effect.Sync
+import cats.syntax.all.*
 
 import com.htmlism.rufio.core.*
 
@@ -13,7 +16,14 @@ package object syntax {
         }
     }
 
-  implicit class InstanceOpsSync[F[_]](path: Path)(implicit F: Sync[F]) extends PathInstanceOps(path, syncThunker(F))
+  implicit class InstanceOpsSync[F[_]](path: Path)(implicit F: Sync[F]) extends PathInstanceOps(path, syncThunker(F)) {
+    def addPosixFilePermissions(permissions: Set[PosixFilePermission]): F[Path] =
+      for {
+        xs <- getPosixFilePermissions
+
+        p <- setPosixFilePermissions(xs ++ permissions)
+      } yield p
+  }
 
   implicit class CompanionOpsSync[F[_]](obj: Path.type)(implicit F: Sync[F]) extends PathCompanionOps(syncThunker(F))
 }

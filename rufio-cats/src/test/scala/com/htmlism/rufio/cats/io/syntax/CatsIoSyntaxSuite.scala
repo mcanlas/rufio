@@ -1,5 +1,7 @@
 package com.htmlism.rufio.cats.io.syntax
 
+import java.nio.file.attribute.PosixFilePermission
+
 import weaver.SimpleIOSuite
 
 import com.htmlism.rufio.core.Path
@@ -26,5 +28,36 @@ object CatsIoSyntaxSuite extends SimpleIOSuite {
 
       b <- f.exists
     } yield expect(b)
+  }
+
+  test("Can get file permissions") {
+    for {
+      f <- Path.createTemporaryFile
+
+      xs <- f.getPosixFilePermissions
+    } yield expect.eql(xs, Set(PosixFilePermission.OWNER_READ, PosixFilePermission.OWNER_WRITE))
+  }
+
+  test("Can set file permissions") {
+    for {
+      f <- Path.createTemporaryFile
+
+      _ <- f.setPosixFilePermissions(Set(PosixFilePermission.OWNER_WRITE))
+
+      xs <- f.getPosixFilePermissions
+    } yield expect.eql(xs, Set(PosixFilePermission.OWNER_WRITE))
+  }
+
+  test("Can add file permissions") {
+    for {
+      f <- Path.createTemporaryFile
+
+      _ <- f.addPosixFilePermissions(Set(PosixFilePermission.OWNER_WRITE))
+
+      xs <- f.getPosixFilePermissions
+    } yield expect.eql(
+      xs,
+      Set(PosixFilePermission.OWNER_READ, PosixFilePermission.OWNER_WRITE, PosixFilePermission.OWNER_WRITE)
+    )
   }
 }

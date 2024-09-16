@@ -19,7 +19,7 @@ class PathInstanceOps[F[_]](path: Path, thunker: Thunker[F]) {
         .toSet
     }
 
-  // `add` equivalent does not exist because it would require sequencing/FlatMap, not available for a non-cats F
+  // `add` equivalent does not exist here because it would require sequencing/FlatMap, not available for a non-cats F
   def setPosixFilePermissions(permissions: Set[PosixFilePermission]): F[Path] =
     thunker.blocking {
       Files
