@@ -31,6 +31,11 @@ class PathInstanceOps[F[_]](path: Path, thunker: Thunker[F]) {
       Files.exists(path)
     }
 
+  def isDirectory: F[Boolean] =
+    thunker.blocking {
+      Files.isDirectory(path)
+    }
+
   def getPosixFilePermissions: F[Set[PosixFilePermission]] =
     thunker.blocking {
       Files

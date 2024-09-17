@@ -30,6 +30,16 @@ object CatsSyncSyntaxSuite extends SimpleIOSuite {
     } yield expect(b)
   }
 
+  test("Can test if a file is a directory") {
+    for {
+      f <- Path.createTemporaryFile
+
+      _ <- out.println(f)
+
+      b <- f.isDirectory
+    } yield expect(!b)
+  }
+
   test("Can write lines") {
     val expected =
       List("foo", "bar")
