@@ -7,7 +7,7 @@ import cats.syntax.all.*
 
 import com.htmlism.rufio.core.*
 
-package object syntax {
+package object syntax extends CommonSyntax {
   private[cats] def syncThunker[F[_]](implicit F: Sync[F]): Thunker[F] =
     new Thunker[F] {
       def blocking[A](x: A): F[A] =

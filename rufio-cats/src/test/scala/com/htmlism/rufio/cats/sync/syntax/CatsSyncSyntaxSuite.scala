@@ -123,4 +123,8 @@ object CatsSyncSyntaxSuite extends SimpleIOSuite {
       b <- p.exists
     } yield expect(b)
   }
+
+  pureTest("Imports pure path name syntax") {
+    expect.eql("abc", Path.of("abc").name)
+  }
 }
