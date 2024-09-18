@@ -40,14 +40,16 @@ object CatsIoSyntaxSuite extends SimpleIOSuite {
     } yield expect(b)
   }
 
-  test("Can test if a file is a directory") {
+  test("Can test if a path is a directory") {
     for {
       f <- Path.createTemporaryFile
+      d <- Path.createTemporaryDirectory
 
       _ <- out.println(f)
 
-      b <- f.isDirectory
-    } yield expect(!b)
+      fileIsDir <- f.isDirectory
+      dirIsDir  <- d.isDirectory
+    } yield expect(!fileIsDir) and expect(dirIsDir)
   }
 
   test("Can write lines") {
