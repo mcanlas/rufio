@@ -7,4 +7,9 @@ class PathCompanionOps[F[_]](thunker: Thunker[F]) {
     thunker.blocking {
       Files.createTempFile("", "")
     }
+
+  def createTemporaryDirectory: F[Path] =
+    thunker.blocking {
+      Files.createTempDirectory("")
+    }
 }
