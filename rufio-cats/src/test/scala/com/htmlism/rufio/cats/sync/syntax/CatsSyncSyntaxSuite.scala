@@ -139,4 +139,15 @@ object CatsSyncSyntaxSuite extends SimpleIOSuite {
   pureTest("Imports pure path name syntax") {
     expect.eql("abc", Path.of("abc").name)
   }
+
+  test("Can create temporary files in a directory and list them") {
+    for {
+      d <- Path.createTemporaryDirectory
+
+      f1 <- Path.createTemporaryFile(d)
+      f2 <- Path.createTemporaryFile(d)
+
+      xs <- d.list
+    } yield expect.eql(Set(f1, f2), xs.toSet)
+  }
 }

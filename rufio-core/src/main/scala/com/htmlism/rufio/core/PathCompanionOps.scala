@@ -8,6 +8,14 @@ class PathCompanionOps[F[_]](thunker: Thunker[F]) {
       Files.createTempFile("", "")
     }
 
+  /**
+    * Creates a temporary file in a given directory
+    */
+  def createTemporaryFile(dir: Path): F[Path] =
+    thunker.blocking {
+      Files.createTempFile(dir, "", "")
+    }
+
   def createTemporaryDirectory: F[Path] =
     thunker.blocking {
       Files.createTempDirectory("")

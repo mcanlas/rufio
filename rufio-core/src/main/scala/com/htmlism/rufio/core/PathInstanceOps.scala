@@ -56,4 +56,13 @@ class PathInstanceOps[F[_]](path: Path, thunker: Thunker[F]) {
       Files
         .createFile(path)
     }
+
+  def list: F[List[Path]] =
+    thunker.blocking {
+      Files
+        .list(path)
+        .toList
+        .asScala
+        .toList
+    }
 }
