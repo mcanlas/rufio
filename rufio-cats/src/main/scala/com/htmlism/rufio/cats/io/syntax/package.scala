@@ -6,7 +6,7 @@ import com.htmlism.rufio.cats.sync.syntax.*
 import com.htmlism.rufio.core.*
 
 package object syntax extends CommonSyntax {
-  implicit class InstanceOpsIo(path: Path) extends InstanceOpsSync[IO](path)
+  implicit class InstanceOpsIO(path: Path) extends InstanceOpsSync[IO](path)
 
-  implicit class CompanionOpsIo(obj: Path.type) extends CompanionOpsSync[IO](obj)
+  implicit class CompanionOpsIO(obj: Path.type) extends CompanionOpsSync[IO](obj)
 }
