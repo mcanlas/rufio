@@ -2,6 +2,8 @@ package com.htmlism.rufio.cats.sync.syntax
 
 import java.nio.file.attribute.PosixFilePermission
 
+import scala.io.BufferedSource
+
 import weaver.SimpleIOSuite
 
 import com.htmlism.rufio.core.Path
@@ -149,5 +151,22 @@ object CatsSyncSyntaxSuite extends SimpleIOSuite {
 
       xs <- d.list
     } yield expect.eql(Set(f1, f2), xs.toSet)
+  }
+
+  test("Can read from an input stream") {
+    val expected =
+      List("foo", "bar")
+
+    for {
+      f <- Path.createTemporaryFile
+
+      _ <- f.writeLines(expected)
+
+      xs <- f.inputStream.use { is =>
+        effect.delay {
+          new BufferedSource(is).getLines().toList
+        }
+      }
+    } yield expect.eql(expected, xs)
   }
 }

@@ -1,8 +1,10 @@
 package com.htmlism.rufio.cats.sync
 
+import java.io.InputStream
+import java.nio.file.Files
 import java.nio.file.attribute.PosixFilePermission
 
-import cats.effect.Sync
+import cats.effect.*
 import cats.syntax.all.*
 
 import com.htmlism.rufio.core.*
@@ -23,6 +25,13 @@ package object syntax extends CommonSyntax {
 
         p <- setPosixFilePermissions(xs ++ permissions)
       } yield p
+
+    def inputStream: Resource[F, InputStream] =
+      Resource.fromAutoCloseable(
+        F.blocking(
+          Files.newInputStream(path)
+        )
+      )
   }
 
   implicit class CompanionOpsSync[F[_]](obj: Path.type)(implicit F: Sync[F]) extends PathCompanionOps(syncThunker(F))
