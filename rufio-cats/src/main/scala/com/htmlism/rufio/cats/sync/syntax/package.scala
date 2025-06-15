@@ -18,7 +18,7 @@ package object syntax extends CommonSyntax {
         }
     }
 
-  implicit class InstanceOpsSync[F[_]](path: Path)(implicit F: Sync[F]) extends PathInstanceOps(path, syncThunker(F)) {
+  implicit class InstanceOpsSync[F[_]](path: Path)(implicit F: Sync[F]) extends PathInstanceOps(path, syncThunker(using F)) {
     def addPosixFilePermissions(permissions: Set[PosixFilePermission]): F[Path] =
       for {
         xs <- getPosixFilePermissions
@@ -34,5 +34,5 @@ package object syntax extends CommonSyntax {
       )
   }
 
-  implicit class CompanionOpsSync[F[_]](obj: Path.type)(implicit F: Sync[F]) extends PathCompanionOps(syncThunker(F))
+  implicit class CompanionOpsSync[F[_]](obj: Path.type)(implicit F: Sync[F]) extends PathCompanionOps(syncThunker(using F))
 }
