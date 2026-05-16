@@ -14,17 +14,13 @@ object DependenciesPlugin extends AutoPlugin {
         p
           .settings(libraryDependencies += "dev.zio" %% "zio" % "2.1.9")
 
-      def withTesting: Project = {
-        val weaverVersion =
-          "0.10.0"
-
+      def withTesting: Project =
         p.settings(
           libraryDependencies ++= Seq(
-            "org.typelevel" %% "weaver-cats"       % weaverVersion % Test,
-            "org.typelevel" %% "weaver-scalacheck" % weaverVersion % Test
+            "org.typelevel" %% "weaver-cats"       % Versions.weaver % Test,
+            "org.typelevel" %% "weaver-scalacheck" % Versions.weaver % Test
           )
         )
-      }
     }
   }
 }
