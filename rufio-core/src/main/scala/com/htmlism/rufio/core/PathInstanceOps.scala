@@ -6,6 +6,16 @@ import java.nio.file.attribute.PosixFilePermission
 import scala.jdk.CollectionConverters.*
 
 class PathInstanceOps[F[_]](path: Path, thunker: Thunker[F]) {
+
+  /**
+    * Read the contents of the file as one `String`, preserving any trailing newline
+    */
+  def readString: F[String] =
+    thunker.blocking {
+      Files
+        .readString(path)
+    }
+
   def readLines: F[List[String]] =
     thunker.blocking {
       Files
@@ -14,7 +24,19 @@ class PathInstanceOps[F[_]](path: Path, thunker: Thunker[F]) {
         .toList
     }
 
+  /**
+    * Write a `String` to a file exactly, without adding a newline
+    */
   def writeString(s: String): F[Path] =
+    thunker.blocking {
+      Files
+        .writeString(path, s)
+    }
+
+  /**
+    * Write a `String` to a file, ending with a newline
+    */
+  def writeLine(s: String): F[Path] =
     thunker.blocking {
       Files
         .write(path, List(s).asJava)

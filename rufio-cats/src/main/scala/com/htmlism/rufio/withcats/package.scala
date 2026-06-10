@@ -15,7 +15,7 @@ package object withcats {
     core.File
 
   implicit class CatsFileOps[F[_]](f: File)(implicit F: Sync[F]) extends core.FileOps[F] {
-    def contents: F[String] =
+    def readString: F[String] =
       F.blocking {
         Files
           .readString(f.path)
@@ -30,6 +30,12 @@ package object withcats {
       }
 
     def writeString(s: String): F[Unit] =
+      F.blocking {
+        Files
+          .writeString(f.path, s)
+      }.void
+
+    def writeLine(s: String): F[Unit] =
       F.blocking {
         Files
           .write(f.path, List(s).asJava)

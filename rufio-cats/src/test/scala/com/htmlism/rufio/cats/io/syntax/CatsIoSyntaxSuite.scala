@@ -76,8 +76,21 @@ object CatsIoSyntaxSuite extends SimpleIOSuite {
 
       _ <- f.writeString(expected)
 
-      xs <- f.readLines
-    } yield expect.eql(expected, xs.mkString("\n"))
+      actual <- f.readString
+    } yield expect.eql(expected, actual)
+  }
+
+  test("Can write a line") {
+    val line =
+      "foo"
+
+    for {
+      f <- Path.createTemporaryFile
+
+      _ <- f.writeLine(line)
+
+      actual <- f.readString
+    } yield expect.eql(line + System.lineSeparator, actual)
 
   }
 

@@ -14,7 +14,7 @@ package object withzio {
     core.File
 
   implicit class ZioFileOps(f: File) extends core.FileOps[Task] {
-    def contents: Task[String] =
+    def readString: Task[String] =
       ZIO.attemptBlocking {
         Files
           .readString(f.path)
@@ -29,6 +29,12 @@ package object withzio {
       }
 
     def writeString(s: String): Task[Unit] =
+      ZIO.attemptBlocking {
+        Files
+          .writeString(f.path, s)
+      }.unit
+
+    def writeLine(s: String): Task[Unit] =
       ZIO.attemptBlocking {
         Files
           .write(f.path, List(s).asJava)
